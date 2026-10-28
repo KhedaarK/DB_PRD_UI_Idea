@@ -8,11 +8,8 @@
   var I = {
     plus: '<path d="M12 5v14M5 12h14"/>',
     agents: '<rect x="3" y="6" width="15" height="13" rx="2"/><path d="M7 11h.01M11 11h.01M7 15h7M19 2v4M17 4h4"/>',
-    grid: '<circle cx="5" cy="5" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="19" cy="5" r="1"/><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="19" r="1"/><circle cx="12" cy="19" r="1"/><circle cx="19" cy="19" r="1"/>',
     down: '<path d="M6 9l6 6 6-6"/>',
     right: '<path d="M9 6l6 6-6 6"/>',
-    pencil: '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/>',
-    more: '<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
     moreV: '<circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/>',
     clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     clip: '<path d="M21 11.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8l9-9a3.7 3.7 0 0 1 5.2 5.2l-9 9a1.8 1.8 0 0 1-2.6-2.6l8.2-8.2"/>',
@@ -76,16 +73,14 @@
         var a = i === idx;
         return '<button type="button" class="' + (a ? 'on' : i < idx ? 'done' : '') + '" data-step="' + s[0] + '"' + (a ? ' aria-current="step"' : '') + '><span class="num">' + (i + 1) + '</span>' + s[1] + '</button>';
       }).join('') + '</nav>' +
-      '<div class="top-r"><button type="button" class="ws"><span>workspace</span>' + icon('down', 16) + '</button>' +
-      '<button type="button" class="iconbtn apps" aria-label="Apps">' + icon('grid', 20) + '</button>' +
+      '<div class="top-r">' +
       '<div class="avatar" aria-label="Khedaar">K</div></div></header>';
   }
 
   function mainhead() {
     if (S.screen !== 'answer') return '';
     return '<div class="mainhead"><nav class="crumbs" aria-label="Breadcrumb"><span>Agents</span>' + icon('right', 14) + '<span>Olist Commerce Agent</span>' + icon('right', 14) + '<span class="cur" aria-current="page">Monthly revenue change</span></nav>' +
-      '<div class="row" style="align-items:center;gap:4px;flex-wrap:nowrap"><button type="button" class="iconbtn" aria-label="Rename chat">' + icon('pencil') + '</button>' +
-      '<button type="button" class="pill" data-act="openShare">Share</button><button type="button" class="iconbtn" aria-label="More options">' + icon('more') + '</button></div></div>';
+      '<button type="button" class="pill" data-act="openShare">Share</button></div>';
   }
 
   function composer(dock) {

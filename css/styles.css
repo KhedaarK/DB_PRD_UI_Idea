@@ -23,8 +23,6 @@ h1,h2,h3{margin:0;font-weight:600;letter-spacing:-0.01em}
 .stepper button.done .num{background:var(--okSoft);color:var(--ok)}
 .stepper button.on{background:var(--black);color:#fff}
 .stepper button.on .num{background:#fff;color:var(--black)}
-.ws{display:flex;align-items:center;gap:4px;border:0;background:none;font-size:15px;padding:6px 8px;border-radius:8px}
-.ws:hover{background:var(--hover)}
 .avatar{width:32px;height:32px;border-radius:50%;background:#B0457A;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px;flex:none}
 .main{overflow-y:auto;display:flex;flex-direction:column;min-width:0;position:relative}
 .mainhead{position:sticky;top:0;z-index:5;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 20px;background:var(--bg)}
@@ -180,7 +178,7 @@ dl.kv dd{margin:0}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:60;background:var(--black);color:#fff;border-radius:999px;padding:10px 18px;font-size:14px;display:flex;align-items:center;gap:8px;box-shadow:0 8px 24px rgba(0,0,0,.2);max-width:calc(100% - 32px)}
 
 /* Responsive */
-@media (max-width:1180px){.stepper-l,.ws,.tag{display:none}}
+@media (max-width:1180px){.stepper-l,.tag{display:none}}
 @media (max-width:760px){
   .top{flex-wrap:wrap;padding-block:8px;row-gap:8px}
   .stepper{order:3;width:100%;margin-left:0;overflow-x:auto;scrollbar-width:none}
@@ -191,7 +189,6 @@ dl.kv dd{margin:0}
 @media (max-width:640px){
   .top{gap:6px;padding:0 8px}
   .wordmark{font-size:18px}
-  .apps{display:none}
   .ont.head{display:none}
   .mainhead .crumbs span:not(.cur),.mainhead .crumbs svg{display:none}
   .content{padding:8px 16px 24px}
