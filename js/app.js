@@ -78,7 +78,7 @@
       }).join('') + '</nav>' +
       '<div class="top-r"><button type="button" class="ws"><span>workspace</span>' + icon('down', 16) + '</button>' +
       '<button type="button" class="iconbtn apps" aria-label="Apps">' + icon('grid', 20) + '</button>' +
-      '<div class="avatar" aria-label="Maya">M</div></div></header>';
+      '<div class="avatar" aria-label="Khedaar">K</div></div></header>';
   }
 
   function mainhead() {
@@ -103,7 +103,7 @@
   // ---------- Start ----------
   function start() {
     var h = '<section aria-label="Guided start" class="start">' +
-      '<h1>How can I help you, Maya?</h1>' + composer(false);
+      '<h1>How can I help you, Khedaar?</h1>' + composer(false);
     if (S.attach) {
       h += '<div class="card menu" role="menu"><div class="menu-h">Add to your question</div>' +
         menuItem('db', 'Databricks data', 'A table, metric view, dashboard or Genie Agent', '') +
