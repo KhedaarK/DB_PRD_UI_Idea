@@ -1,6 +1,6 @@
 # GenieOne trust layer prototype
 
-A static, click-through concept prototype for a "trust layer" in GenieOne, styled after the Databricks One / Genie UI (DM Sans, warm off-white surfaces, left sidebar, pill buttons, black primary actions). It shows how an answer explains where its numbers came from, how the question was interpreted, and what happens when a user changes a certified definition. All data is illustrative.
+A static, click-through concept prototype for a "trust layer" in GenieOne, styled after the Databricks One / Genie UI (DM Sans, warm off-white surfaces, pill buttons, black primary actions). It shows how an answer explains where its numbers came from, how the question was interpreted, and what happens when a user changes a certified definition. All data is illustrative.
 
 ## Screens
 
@@ -10,7 +10,7 @@ A static, click-through concept prototype for a "trust layer" in GenieOne, style
 4. **Schedule**: a confirmation modal with an email preview. Confirming opens the **Schedules** page.
 5. **Connected apps** (Customizations): Google Drive (connected) and Microsoft 365 (not connected).
 
-You can get around with the left sidebar like in the real app, or with the **Walkthrough 1–5** stepper in the top bar for demos. To link straight to a step, add a hash to the URL: `#start`, `#answer`, `#share`, `#schedule`, `#schedules` or `#connect`.
+Navigate with the labeled **Walkthrough** stepper in the top bar (1 Start · 2 Answer · 3 Share · 4 Schedule · 5 Connected apps); completed steps are tinted green. To link straight to a step, add a hash to the URL: `#start`, `#answer`, `#share`, `#schedule`, `#schedules` or `#connect`.
 
 ## Run
 
@@ -29,4 +29,4 @@ css/styles.css    design tokens, layout and responsive rules
 js/app.js         state, screen renderers, modals and the click handler (vanilla JS)
 ```
 
-`js/app.js` keeps all UI state in one object `S`. Every interaction updates `S` and calls `render()`, which rebuilds the shell (top bar, sidebar, main area, modal, toast) from HTML strings. Icons are inline SVGs from the `I` map, drawn with `icon(name)`.
+`js/app.js` keeps all UI state in one object `S`. Every interaction updates `S` and calls `render()`, which rebuilds the shell (top bar, main area, modal, toast) from HTML strings. Icons are inline SVGs from the `I` map, drawn with `icon(name)`.

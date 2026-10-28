@@ -1,5 +1,5 @@
 (function () {
-  var S = { screen: 'start', def: 'pf', role: 'view', scope: 'upto', sources: false, attach: false, handoff: false, scheduled: false, view: 'chart', sql: null, thought: true, fb: null, fbSent: false, reasons: {}, inputs: {}, modal: null, toast: null, sidebar: true, navOpen: false };
+  var S = { screen: 'start', def: 'pf', role: 'view', scope: 'upto', sources: false, attach: false, handoff: false, scheduled: false, view: 'chart', sql: null, thought: true, fb: null, fbSent: false, reasons: {}, inputs: {}, modal: null, toast: null };
   var RAW = [['Jan', 1115], ['Feb', 993], ['Mar', 1160], ['Apr', 1160], ['May', 1153], ['Jun', 1023], ['Jul', 1066], ['Aug', 1022]];
   var STEPS = [['start', 'Start'], ['answer', 'Answer'], ['share', 'Share'], ['schedule', 'Schedule'], ['connect', 'Connected apps']];
   var QUESTION = 'How did revenue change month over month?';
@@ -8,12 +8,6 @@
   var I = {
     plus: '<path d="M12 5v14M5 12h14"/>',
     agents: '<rect x="3" y="6" width="15" height="13" rx="2"/><path d="M7 11h.01M11 11h.01M7 15h7M19 2v4M17 4h4"/>',
-    compass: '<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
-    folder: '<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
-    calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
-    bars: '<path d="M4 20V6M9 20V4M14 20v-9M19 20v-6M3 20h18"/>',
-    search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
-    sidebar: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/>',
     grid: '<circle cx="5" cy="5" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="19" cy="5" r="1"/><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="19" r="1"/><circle cx="12" cy="19" r="1"/><circle cx="19" cy="19" r="1"/>',
     down: '<path d="M6 9l6 6 6-6"/>',
     right: '<path d="M9 6l6 6-6 6"/>',
@@ -74,45 +68,17 @@
   }
 
   function topbar() {
-    var cur = currentStep();
+    var cur = currentStep(), idx = STEPS.map(function (s) { return s[0]; }).indexOf(cur);
     return '<header class="top">' +
-      '<button type="button" class="iconbtn" aria-label="Toggle sidebar" data-act="toggleSidebar">' + icon('sidebar', 20) + '</button>' +
       '<div class="brand">' + LOGO + '<span class="wordmark">databricks</span><span class="tag">Concept prototype · illustrative data</span></div>' +
-      '<div class="top-r"><nav class="stepper" aria-label="Prototype walkthrough"><span class="stepper-l">Walkthrough</span>' +
+      '<nav class="stepper" aria-label="Prototype walkthrough"><span class="stepper-l">Walkthrough</span>' +
       STEPS.map(function (s, i) {
-        var a = cur === s[0];
-        return '<button type="button" class="' + (a ? 'on' : '') + '" data-step="' + s[0] + '" title="' + s[1] + '" aria-label="Step ' + (i + 1) + ': ' + s[1] + '"' + (a ? ' aria-current="step"' : '') + '>' + (i + 1) + (a ? '<span class="st-l"> · ' + s[1] + '</span>' : '') + '</button>';
+        var a = i === idx;
+        return '<button type="button" class="' + (a ? 'on' : i < idx ? 'done' : '') + '" data-step="' + s[0] + '"' + (a ? ' aria-current="step"' : '') + '><span class="num">' + (i + 1) + '</span>' + s[1] + '</button>';
       }).join('') + '</nav>' +
-      '<button type="button" class="ws"><span>workspace</span>' + icon('down', 16) + '</button>' +
+      '<div class="top-r"><button type="button" class="ws"><span>workspace</span>' + icon('down', 16) + '</button>' +
       '<button type="button" class="iconbtn apps" aria-label="Apps">' + icon('grid', 20) + '</button>' +
       '<div class="avatar" aria-label="Maya">M</div></div></header>';
-  }
-
-  function navItem(ic, label, go, active) {
-    return '<button type="button" class="navi' + on(active) + '"' + (go ? ' data-go="' + go + '"' : '') + (active ? ' aria-current="page"' : '') + '>' + (ic ? icon(ic, 20) : '') + '<span>' + label + '</span></button>';
-  }
-
-  function sidebar(D) {
-    var s = S.screen;
-    return '<aside class="side" aria-label="Main navigation"><nav>' +
-      navItem('plus', 'New chat', 'start', s === 'start') +
-      navItem('agents', 'Agents') +
-      navItem('compass', 'Discover') +
-      navItem('folder', 'My stuff') +
-      navItem('calendar', 'Schedules', 'schedules', s === 'schedules') +
-      navItem('bars', 'Customizations', 'connect', s === 'connect') +
-      navItem('search', 'Search chats') +
-      '<div class="navgroup">Schedules</div>' +
-      (S.scheduled ? navItem(null, D.schedName, 'schedules') : '') +
-      navItem(null, 'Daily Olist file list email', 'schedules') +
-      '<div class="navgroup">Today</div>' +
-      navItem(null, 'Monthly revenue change', 'answer', s === 'answer') +
-      '<div class="navgroup">Last 7 days</div>' +
-      navItem(null, 'Customers by state') +
-      navItem(null, 'Late deliveries by region') +
-      navItem(null, 'Seller performance review') +
-      navItem(null, 'Review scores vs. delivery time') +
-      '</nav></aside>';
   }
 
   function mainhead() {
@@ -353,9 +319,8 @@
     var view = sc === 'start' ? start() : sc === 'answer' ? answer(D) : sc === 'schedules' ? schedules(D) : connect();
     var wide = sc === 'schedules' || sc === 'connect';
     document.getElementById('root').innerHTML =
-      '<div class="shell' + (S.sidebar ? '' : ' nosb') + (S.navOpen ? ' sbopen' : '') + '">' + topbar() +
-      '<div class="body">' + sidebar(D) + '<div class="scrim"></div>' +
-      '<main class="main" id="main">' + mainhead() + '<div class="content' + (wide ? ' wide' : '') + '">' + view + '</div>' + (sc === 'answer' ? composer(true) : '') + '</main></div></div>' +
+      '<div class="shell">' + topbar() +
+      '<main class="main" id="main">' + mainhead() + '<div class="content' + (wide ? ' wide' : '') + '">' + view + '</div>' + (sc === 'answer' ? composer(true) : '') + '</main></div>' +
       (S.modal === 'share' ? shareModal() : S.modal === 'schedule' ? scheduleModal(D) : '') +
       (S.toast ? '<div class="toast" role="status">' + icon('check', 16) + S.toast + '</div>' : '');
     document.getElementById('main').scrollTop = top;
@@ -365,8 +330,8 @@
   }
 
   function step(s) {
-    if (s === 'share' || s === 'schedule') set({ screen: 'answer', modal: s, attach: false, navOpen: false });
-    else set({ screen: s, modal: null, attach: false, navOpen: false });
+    if (s === 'share' || s === 'schedule') set({ screen: 'answer', modal: s, attach: false });
+    else set({ screen: s, modal: null, attach: false });
   }
 
   document.addEventListener('input', function (e) {
@@ -376,21 +341,19 @@
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;
     if (S.modal) { S.modal = null; render(); }
-    else if (S.attach || S.navOpen) { S.attach = false; S.navOpen = false; render(); }
+    else if (S.attach) { S.attach = false; render(); }
   });
 
   document.addEventListener('click', function (e) {
     var t = e.target;
     if (t.classList.contains('overlay')) { S.modal = null; render(); return; }
-    if (t.classList.contains('scrim')) { S.navOpen = false; render(); return; }
     var b = t.closest('button');
     if (!b) return;
     if (b.dataset.step) { step(b.dataset.step); return; }
-    if (b.dataset.go) { set({ screen: b.dataset.go, attach: false, modal: null, navOpen: false }); return; }
+    if (b.dataset.go) { set({ screen: b.dataset.go, attach: false, modal: null }); return; }
     if (b.dataset.set) { var kv = b.dataset.set.split(':'); S[kv[0]] = kv[1] || null; render(); return; }
     var a = b.dataset.act;
-    if (a === 'toggleSidebar') { if (window.matchMedia('(max-width:900px)').matches) S.navOpen = !S.navOpen; else S.sidebar = !S.sidebar; render(); }
-    else if (a === 'sources') { S.sources = !S.sources; render(); }
+    if (a === 'sources') { S.sources = !S.sources; render(); }
     else if (a === 'attach') { S.attach = !S.attach; render(); }
     else if (a === 'handoff') { S.handoff = !S.handoff; render(); }
     else if (a === 'handoffFromStart') { set({ screen: 'answer', handoff: true }); }
