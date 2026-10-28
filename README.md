@@ -1,14 +1,16 @@
 # GenieOne trust layer prototype
 
-A static, click-through concept prototype for a "trust layer" in GenieOne. It shows how an answer explains where its numbers came from, how the question was interpreted, and what happens when a user changes a certified definition. All data is illustrative.
+A static, click-through concept prototype for a "trust layer" in GenieOne, styled after the Databricks One / Genie UI (DM Sans, warm off-white surfaces, left sidebar, pill buttons, black primary actions). It shows how an answer explains where its numbers came from, how the question was interpreted, and what happens when a user changes a certified definition. All data is illustrative.
 
 ## Screens
 
-1. **Start**: a guided prompt, a list of the data sources the user can access, an attach menu, and certified starter questions.
-2. **Answer**: a headline, a chart/table toggle, a confidence note, the ontology mapping ("How Genie understood your question"), the calculation with linked SQL, a revenue definition switch (price + freight / price only), lineage, feedback, and a handoff to the data team.
-3. **Share**: recipients, role and scope options, with a warning when sharing live.
-4. **Schedule**: a confirmation dialog with an email preview, plus a Schedules list once confirmed.
-5. **Connected apps**: Google Drive (connected) and Microsoft 365 (not connected).
+1. **Start** (New chat): a greeting, the question composer with an attach menu, the data sources the user can access, and certified starter questions.
+2. **Answer**: breadcrumbs, the user's question, "Thought process" (how Genie mapped the question to the ontology), the headline, a chart/table card, a confidence note, the calculation with a definition switch (price + freight / price only) and linked SQL, lineage, feedback, a handoff to the data team, suggested follow-ups, and a sticky composer.
+3. **Share**: a modal over the answer with role and scope options and a warning when sharing live.
+4. **Schedule**: a confirmation modal with an email preview. Confirming opens the **Schedules** page.
+5. **Connected apps** (Customizations): Google Drive (connected) and Microsoft 365 (not connected).
+
+You can get around with the left sidebar like in the real app, or with the **Walkthrough 1–5** stepper in the top bar for demos. To link straight to a step, add a hash to the URL: `#start`, `#answer`, `#share`, `#schedule`, `#schedules` or `#connect`.
 
 ## Run
 
@@ -22,9 +24,9 @@ python3 -m http.server 8000
 ## Layout
 
 ```
-index.html        page shell (header, nav, #app mount point)
-css/styles.css    all styles
-js/app.js         state, screen renderers and the click handler (vanilla JS)
+index.html        page shell (fonts, #root mount point)
+css/styles.css    design tokens, layout and responsive rules
+js/app.js         state, screen renderers, modals and the click handler (vanilla JS)
 ```
 
-`js/app.js` keeps all UI state in one object `S`. Every interaction updates `S` and calls `render()`, which rebuilds the current screen from HTML strings.
+`js/app.js` keeps all UI state in one object `S`. Every interaction updates `S` and calls `render()`, which rebuilds the shell (top bar, sidebar, main area, modal, toast) from HTML strings. Icons are inline SVGs from the `I` map, drawn with `icon(name)`.
