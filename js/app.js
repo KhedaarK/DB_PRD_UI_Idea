@@ -120,7 +120,7 @@
         '<div style="color:var(--ink3);font-size:13px">Published by your data team in Unity Catalog. Missing something? <button type="button" class="link" data-act="handoffFromStart">Ask the data team</button></div></div>';
     }
     h += '<div class="stack" style="gap:10px;margin-top:10px"><div class="label">Start from a certified question</div><div class="row" style="gap:8px">' +
-      [QUESTION, 'Which states have the most customers?', 'What is our late-delivery rate?'].map(function (q) {
+      [QUESTION].map(function (q) {
         return '<button type="button" class="chip" data-go="answer">' + q + '</button>';
       }).join('') + '</div></div></section>';
     return h;
